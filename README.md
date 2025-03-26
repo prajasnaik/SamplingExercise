@@ -33,7 +33,7 @@ pip install numpy matplotlib
     cd SamplingExercise
     ```
 
-2. To generate statistical samples:
+2. To generate statistical samples and then visualizing the same:
     ```bash
     python assignment1.py
     ```

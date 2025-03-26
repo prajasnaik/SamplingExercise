@@ -1,5 +1,5 @@
 import numpy as np
-from errors import InvalidParametersError
+from .errors import InvalidParametersError
 
 def generate_theoretical_pdf_points(a: float, b: float, c: float, n_samples: int = 1000) -> tuple[np.ndarray[float], np.ndarray[float]]:
     """
