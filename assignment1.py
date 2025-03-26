@@ -1,8 +1,8 @@
 import numpy as np
 from math import sqrt, pow
 np.random.seed(42)
-from errors import InvalidParametersError
-from probability_density_functions import gamma_pdf, exponential_pdf
+from helpers.errors import InvalidParametersError
+from helpers.probability_density_functions import gamma_pdf, exponential_pdf
 
 def get_value_from_probability(samples: np.ndarray, cdf_at_c: float, a: float, b: float, c: float) -> np.ndarray[float]:
     """
@@ -35,6 +35,8 @@ def get_x_from_uniform(U: float, a: float, b: float, c: float, cdf_at_c: float) 
     Returns:
         float: A value from the triangular distribution.
     """
+
+    # Formulas derived on paper are used to calculate the transformed value
     if U < cdf_at_c:
         return sqrt(U * (b - a) * (c - a)) + a
     else:
@@ -129,6 +131,8 @@ def get_x_from_pareto(U: float, xm: float, alpha: int) -> float:
     Returns:
         float: A value from the Pareto distribution.
     """
+
+    # Formulas derived on paper are used to calculate the transformed value
     return xm / pow(1 - U, 1/alpha)
 
 def generate_gamma_distribution_samples(n_samples: int = 10000) -> np.ndarray[float]:
@@ -157,7 +161,7 @@ def generate_gamma_distribution_samples(n_samples: int = 10000) -> np.ndarray[fl
     M = 4 / np.e
 
     samples = np.random.uniform(0, 1, n_samples)
-    exponential_samples = -np.log(1 - samples) / lambda_2
+    exponential_samples = -np.log(1 - samples) / lambda_2   # Inverse CDF of exponential distribution as calculated on paper
 
     accepted_samples = []
     for sample in exponential_samples:

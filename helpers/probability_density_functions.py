@@ -57,11 +57,52 @@ def generate_theoretical_pareto_pdf_points(xm: float, alpha: int, n_samples: int
     return x_values, pdf_values
 
 def get_pareto_pdf_val_from_x(x: float, xm: float, alpha: int) -> float:
+    """
+    Calculate the probability density function (PDF) value for a Pareto distribution at a given x.
+    
+    Args:
+        x (float): The value at which to calculate the PDF
+        xm (float): The scale parameter (minimum possible value) of the Pareto distribution
+        alpha (int): The shape parameter of the Pareto distribution
+        
+    Returns:
+        float: The PDF value at the given x
+        
+    Note:
+        The Pareto PDF is defined as (α * xm^α) / x^(α+1) for x ≥ xm
+    """
     return (alpha * pow(xm, alpha)) / pow(x, alpha + 1)
 
 
 def exponential_pdf(x: np.ndarray) -> np.ndarray[float]:
+    """
+    Calculate the probability density function (PDF) values for an exponential distribution.
+    
+    Args:
+        x (np.ndarray): Array of values at which to calculate the PDF
+        
+    Returns:
+        np.ndarray[float]: Array of PDF values corresponding to the input x values
+        
+    Note:
+        This function implements an exponential distribution with λ=0.75,
+        where the PDF is defined as λ*e^(-λx) for x ≥ 0
+    """
     return 0.75 * np.exp(-0.75 * x)
 
 def gamma_pdf(x: np.ndarray) -> np.ndarray[float]:
+    """
+    Calculate the probability density function (PDF) values for a gamma distribution.
+    
+    Args:
+        x (np.ndarray): Array of values at which to calculate the PDF
+        
+    Returns:
+        np.ndarray[float]: Array of PDF values corresponding to the input x values
+        
+    Note:
+        This function implements a gamma distribution with shape parameter k=2 and rate parameter λ=1.5,
+        where the PDF is defined as (λ^k * x^(k-1) * e^(-λx)) / Γ(k)
+        For k=2, this simplifies to (λ^2 * x * e^(-λx)), which equals 2.25 * x * e^(-1.5x)
+    """
     return 2.25 * x * np.exp(-1.5 * x)
